@@ -15,8 +15,19 @@ app.set('View engine', 'jade');
 // app.use(app.router);
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    const body = 'Hello World';
+    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader('Content-Length', body.length);
+    res.end(body);
 })
+
+// app.get('/api', (req, res) => {
+//     res.send({name: '张三', age: 40});
+// })
+
+
+const api = require('./routes/api');
+app.get('/api', api.index);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
