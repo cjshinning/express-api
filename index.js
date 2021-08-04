@@ -1,22 +1,14 @@
 const express = require('express');
 const app = express();
 
-app.use((request, response, next) => {
-    if(request.url == '/'){
-        response.writeHead(200, {'Content-Type': 'text/plain'});
-        response.end('Welcome to the homepage!\n');
-    }else{
-        next();
-    }
+app.use('/home', (request, response, next) => {
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end('Welcome to the homepage!\n');
 });
 
-app.use((request, response, next) => {
-    if(request.url == '/about'){
-        response.writeHead(200, {'Content-Type': 'text/plain'});
-        response.end('Welcome to the about page!\n');
-    }else{
-        next();
-    }
+app.use('/about', (request, response, next) => {
+    response.writeHead(200, {'Content-Type': 'text/plain'});
+    response.end('Welcome to the about page!\n');
 });
 
 app.use((request, response) => {
