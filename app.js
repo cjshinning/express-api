@@ -1,36 +1,20 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
+const router = express.Router();
 
-const hbs = require('hbs');
-
-const blogEngine = require('./blog');
-
-app.set('view engine', 'html');
-
-app.engine('html', hbs.__express);
-app.use(bodyParser.json());
-
-app.get('/', (req, res) => {
-    res.render('index', {
-        title: '最近文章',
-        entries: blogEngine.getBlogEntries()
-    });
+router.use((req, res, next) => {
+    console.log(req.method, req.url);
+    next();
 })
 
-app.get('/about', (req, res) => {
-    res.render('about', {
-        title: '自我介绍'
-    });
+router.get('/', (req, res) => {
+    res.send('首页');
 })
 
-app.get('/article/:id', (req, res) => {
-    const entry = blogEngine.getBlogEntry(req.params.id);
-    console.log(entry);
-    res.render('article', {
-        title: entry.title,
-        blog: entry
-    });
+router.get('/about', (req, res) => {
+    res.send('关于');
 })
+
+app.use('/app', router);
 
 app.listen(3000);
