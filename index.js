@@ -14,8 +14,14 @@ app.get('/about', (request, response) => {
     response.end('Welcome to the about page!\n');
 });
 
-app.get('/hello/:who', (request, response) => {
-    response.end('Hello, ' + request.params.who + '.');
+// 在模式参数后面加上问号，表示该参数可选
+app.get('/hello/:who?', (request, response) => {
+    if(request.params.who){
+        response.end('Hello, ' + request.params.who + '.');
+    }else{
+        response.end('Hello, Guest.');
+    }
+    
 });
 
 app.get('*', (request, response) => {
