@@ -11,7 +11,8 @@ app.get('/', (request, response) => {
 });
 
 app.get('/about', (request, response) => {
-    response.end('Welcome to the about page!\n');
+    // response.end('Welcome to the about page!\n');
+    response.redirect(301, 'http://www.example.com');
 });
 
 // 在模式参数后面加上问号，表示该参数可选
